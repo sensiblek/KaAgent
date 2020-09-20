@@ -79,7 +79,7 @@ public class AgentClient extends Thread {
 		File[] files = rootPath.listFiles();
 		try {
 			dos.writeUTF("files");
-			dos.writeInt(files.length);
+			dos.writeInt(files == null?0:files.length);
 			for(File file:files) {
 				dos.writeUTF(file.getName());
 			}

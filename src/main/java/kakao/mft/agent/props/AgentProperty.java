@@ -32,23 +32,8 @@ public class AgentProperty implements AgentPropertyKey {
 		Path filePath = null;
 		
 		if (path == null) {
-			try {
-				if (this.getClass().getResource("/") == null) {
-					URLClassLoader c = (URLClassLoader)ClassLoader.getSystemClassLoader();
-					URL[] urls = c.getURLs();
-					URI resolvedUri;
-					for(URL url:urls) {
-						resolvedUri = url.toURI().resolve("config/" + AGENT_CONFIG_FILE);
-						if (Paths.get(resolvedUri).toFile().exists()) {
-							filePath = Paths.get(resolvedUri);
-							break;
-						}
-					}
-				} else {
-					Path rootPath = Paths.get(this.getClass().getResource("/").toURI());
-					filePath = rootPath.resolve("config/" + AGENT_CONFIG_FILE);
-				}
-			} catch (URISyntaxException e) {}
+			Path rootPath = Paths.get("");
+			filePath = rootPath.resolve("config/" + AGENT_CONFIG_FILE);
 		} else {
 			filePath = Paths.get(path);
 		}
